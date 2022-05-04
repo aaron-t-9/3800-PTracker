@@ -1474,6 +1474,7 @@ input:checked ~ .dot {
     margin-left: 15px !important;
     margin-right: 15px !important;
     padding-top: 0px !important;
+    transform: scale(.9) !important;
   }
 }
 
