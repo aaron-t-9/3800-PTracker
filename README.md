@@ -3,6 +3,11 @@
 ## :whale: Docker
 - `docker-compose up --build`
 
+May 24/22 Updates:
+- Dockerizing simplified, with wait-for-it.sh no longer being ran.
+- Issues regarding authentication: Google Client Keys are not passed in
+    - Team was working on removing Google Auth altogether
+
 ## Developing
 
 - You need MySQL installed and running on your machine
