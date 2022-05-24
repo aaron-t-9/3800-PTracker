@@ -10,4 +10,4 @@ RUN npm install
 RUN npm i nodemon
 
 EXPOSE 3000
-CMD ["/bin/bash", "start.sh"]
+CMD ["/bin/sh", "start.sh"]

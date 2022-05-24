@@ -70,6 +70,8 @@ input:checked ~ .dot {
  #calendar > div.fc-view-harness.fc-view-harness-passive > div > table > thead > tr > th:nth-child(3) > div > div > div > table > tbody > tr:nth-child(2){
      font-size: 13px;
  }
+
+ 
  
 body {
     font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
