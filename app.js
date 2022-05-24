@@ -67,6 +67,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(passUser);
 
+// app.post('/auth/login', 
+//   passport.authenticate('local', { failureRedirect: '/login' }),
+//   function(req, res) {
+//     res.redirect('/dashboard');
+//   });
+
 app.use(flashMessages);
 app.use(sectionChecker);
 app.use(ndaChecker);

@@ -12,6 +12,10 @@ router.get('/logout', (req, res) => {
     res.redirect('/auth/login');
 });
 
+// router.get('/login', passport.authenticate('local', {failureRedirect: FAILURE_LOGIN_URL}), (req, res) => {
+//     res.redirect('/dashboard');
+// });
+
 router.get('/login', forwardIfAuthenticated, (req, res) => res.render('auth/login'));
 
 router.get('/google', passport.authenticate('google', {

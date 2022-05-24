@@ -1,5 +1,6 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const LocalStrategy = require('passport-local');
 const {PrismaClient} = require('@prisma/client');
 const prisma = new PrismaClient();
 const User = require('../models/user');
@@ -11,6 +12,38 @@ if (URL.endsWith('/')) {
 }
 
 const GOOGLE_CALLBACK_URL = URL + '/auth/google/callback';
+
+// passport.use(new LocalStrategy(
+//     async (done) => {
+//         const localUser = await prisma.user.findUnique({
+//             where: {
+//                 email: 'dev@gmail.com',
+//             },
+//         });
+
+//         if (!localUser) {
+//             let URL = process.env.APP_URL;
+//             if (URL.endsWith('/')) {
+//                 URL = URL.slice(0, -1);
+//             }
+//             await axios.post(URL + '/email/newUser', {
+//                 name: 'DEVELOPER',
+//             });
+//         }
+
+//         const user = await prisma.user.upsert({
+//             where: {
+//                 email: 'dev@gmail.com',
+//             },
+//             create: {
+//                 name: 'DEVELOPER',
+//                 email: 'dev@gmail.com',
+//                 sectionId: 4,
+//             }
+//         });
+//         return done(null, user);
+//     }
+// ));
 
 passport.use(new GoogleStrategy({
         clientID: process.env.GOOGLE_CLIENT_ID,
