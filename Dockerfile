@@ -1,15 +1,14 @@
 FROM node:latest
 
-RUN useradd -m -d /app ptracker
-
-
 WORKDIR /app
-USER ptracker
 
-COPY --chown=ptracker . /app
+COPY package.json ./
 
-RUN npm install
-RUN npm i nodemon
+RUN npm install; \
+    npm i nodemon;
+
+COPY . ./
 
 EXPOSE 3000
-CMD ["/bin/sh", "start.sh"]
+
+CMD ["/bin/bash", "start.sh"]

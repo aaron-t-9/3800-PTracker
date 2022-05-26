@@ -34,13 +34,13 @@ async function main() {
             name: faker.name.firstName() + ' ' + faker.name.lastName(),
             email: faker.internet.email(),
             googleId: faker.datatype.number({min: 11491216591676147997, max: 12691216591676147997}).toString(),
-            role: i <= 4 ? Role.INSTRUCTOR : faker.random.arrayElement([
+            role: i <= 4 ? Role.INSTRUCTOR : faker.helpers.arrayElement([
                 Role.STUDENT,
                 Role.INSTRUCTOR,
                 Role.ADMIN
             ]),
             acceptedNda: true,
-            sectionId: faker.random.arrayElement(sections.map(s => s.id)),
+            sectionId: faker.helpers.arrayElement(sections.map(s => s.id)),
             emailNotifications: faker.datatype.boolean(),
         });
     }
@@ -80,11 +80,11 @@ async function main() {
 
     for (let i = 1; i <= 500; i++) {
         shifts.push({
-            userId: faker.random.arrayElement(users.map(u => u.id)),
-            siteId: faker.random.arrayElement(sites.map(s => s.id)),
+            userId: faker.helpers.arrayElement(users.map(u => u.id)),
+            siteId: faker.helpers.arrayElement(sites.map(s => s.id)),
             date: faker.datatype.boolean() ? faker.date.recent(7) : faker.date.soon(7),
-            type: faker.random.arrayElement(['DAY', 'EVENING', 'NIGHT']),
-            status: faker.random.arrayElement(['NORMAL', 'DELETED']),
+            type: faker.helpers.arrayElement(['DAY', 'EVENING', 'NIGHT']),
+            status: faker.helpers.arrayElement(['NORMAL', 'DELETED']),
         });
     }
 
