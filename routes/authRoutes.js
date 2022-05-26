@@ -3,16 +3,32 @@ const passport = require('passport');
 
 const router = express.Router();
 
-const {forwardIfAuthenticated} = require('../middleware/checkAuth')
+const {forwardIfAuthenticated, ensureAuthenticated} = require('../middleware/checkAuth')
 
 const FAILURE_LOGIN_URL = process.env.APP_URL + '/auth/login/error';
+
+// router.get('/', ensureAuthenticated, (req, res) => {
+//     res.render('/auth/login', { email: req.user.email })
+// })
 
 router.get('/logout', (req, res) => {
     req.logout();
     res.redirect('/auth/login');
 });
 
-router.get('/login', forwardIfAuthenticated, (req, res) => res.render('auth/login'));
+// router.post('/login/email', 
+// passport.authenticate('local', {
+//     failureRedirect: '/', successRedirect: '/dashboard',
+// }));
+
+router.post('/login/email', passport.authenticate('local'), 
+function(req, res) {
+    console.log("parse", req.user);
+});
+
+router.get('/login', function(req, res, next) {
+    res.render('auth/login');
+});
 
 router.get('/google', passport.authenticate('google', {
     scope: [

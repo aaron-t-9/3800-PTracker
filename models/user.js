@@ -40,6 +40,16 @@ module.exports = class User {
         }));
     }
 
+    static findByEmail = async (email) => {
+        return new User(await User.prisma.user.findUnique({
+            where: {email: email},
+            include: {
+                section: true,
+                shift: true,
+            },
+        }));
+    }
+
     static all = async () => {
         return await User.prisma.user.findMany({
             include: {

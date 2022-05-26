@@ -1,10 +1,12 @@
 FROM node:latest
 
 RUN useradd -m -d /app ptracker
-COPY --chown=ptracker . /app
+
 
 WORKDIR /app
 USER ptracker
+
+COPY --chown=ptracker . /app
 
 RUN npm install
 RUN npm i nodemon

@@ -70,6 +70,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('addDatePicker').value = info.dateStr             
             }
         },
+        select: function(info) {
+            if(!containsEvent(info.dateStr)) {
+                var titleStr = prompt('Enter an event');
+                calendar.addEvent({
+                    title: titleStr,
+                    start: info.startStr,
+                    end: info.endStr,
+                    allDay: true
+            });
+            }
+          },
         eventClick: function (info) {
             if (info.event._def.ui.backgroundColor !== '#577590') {
                 openModal('editShiftModal')

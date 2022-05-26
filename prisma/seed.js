@@ -45,6 +45,15 @@ async function main() {
         });
     }
 
+    users.push({
+        id: 101,
+        name: 'DEVELOPER',
+        email: 'dev@gmail.com',
+        googleId: faker.datatype.number({min: 11491216591676147997, max: 12691216591676147997}).toString(),
+        role: Role.ADMIN,
+        sectionId: 4,
+    });
+
     await prisma.user.createMany({
         data: [
             ...users,
