@@ -16,11 +16,19 @@ router.get('/logout', (req, res) => {
     res.redirect('/auth/login');
 });
 
-router.post('/login/email', passport.authenticate('local', {failureRedirect: '/login', successRedirect: '/dashboard', failureFlash: true}));
+// router.post('/login/email', 
+// passport.authenticate('local', {
+//     failureRedirect: '/', successRedirect: '/dashboard',
+// }));
+
+router.post('/login/email', passport.authenticate('local'), 
+function(req, res) {
+    console.log("parse", req.user);
+});
 
 router.get('/login', function(req, res, next) {
-    res.render('/auth/login')
-})
+    res.render('auth/login');
+});
 
 router.get('/google', passport.authenticate('google', {
     scope: [

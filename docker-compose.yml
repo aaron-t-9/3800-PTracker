@@ -18,11 +18,14 @@ services:
       - db
     build: .
     environment:
-      DATABASE_URL: "mysql://root:Columbiabc1!@db:3306/mydb"
-      DATABASE_URL_TESTING: "mysql://root:Columbiabc1!@db:3306/mydb_testing"
+      DATABASE_URL: "mysql://root:root@db:3306/mydb"
+      DATABASE_URL_TESTING: "mysql://root:root@db:3306/mydb_testing"
       APP_URL: http://localhost:8000
     ports:
       - '8000:3000'
+    volumes:
+      - /node_modules
+
 
 volumes:
   issp_db_data:

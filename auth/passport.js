@@ -29,15 +29,71 @@ const axios = require("axios");
 // const GOOGLE_CALLBACK_URL = URL + '/auth/google/callback';
 
 passport.use(new LocalStrategy(
-    function(email, done) {
-      prisma.user.findUnique({ email: email }, function (err, user) {
+    function(request, done) {
+      console.log(request);
+      prisma.user.findUnique({ 
+        where: {email: request.body.email,},
+      }, function (err, user) {
+        console.log("passport 34");
         if (err) { return done(err); }
         if (!user) { return done(null, false, { message: 'user not found'}); }
-        if (!user.verify(email)) { return done(null, false, { message: 'email not found'}); }
+        if (!user.verify(request.body.email)) { return done(null, false, { message: 'email not found'}); }
         return done(null, user);
-      });
+      }).catch(err => {console.log(err.message)});
     }
   ));
+
+// passport.use(new LocalStrategy(
+//   function(username, done) {
+//     User.findByEmail({ email: username }, function (err, user) {
+//       if (err) { return done(err); }
+//       if (!user) { return done(null, false); }
+//       return done(null, user);
+//     });
+//   }
+// ));
+
+// passport.use(new LocalStrategy(
+//   function(email, done) {
+
+//     var user = prisma.user.findUnique({
+//       where: {
+//         email: email,
+//       },
+//     });
+//     console.log(user);
+
+//     // function (user) {
+//     //   console.log("passport 55");
+//     //   if (!user) { return done(null, false, { message: 'user not found'}); }
+//     //   if (!user.verify(email)) { return done(null, false, { message: 'email not found'}); }
+//     // });
+
+//     // prisma.user.findUnique({ 
+//     //   where: {email: email,},
+//     // }, function (err, user) {
+//     //   console.log("passport 34");
+//     //   if (err) { return done(err); }
+//     //   if (!user) { return done(null, false, { message: 'user not found'}); }
+//     //   if (!user.verify(email)) { return done(null, false, { message: 'email not found'}); }
+//     //   return done(null, user);
+//     // });
+//   }
+// ));
+
+//   passport.use(new LocalStrategy({
+//     usernameField: 'email',
+//     session: false
+//   },
+//   function(email, done) {
+//     prisma.user.findUnique({ email: email }, function (err, user) {
+//       if (err) { return done(err); }
+//       if (!user) { return done(null, false, { message: 'user not found'}); }
+//       if (!user.verify(email)) { return done(null, false, { message: 'email not found'}); }
+//       return done(null, user);
+//     });
+//   }
+// ));
 
 // passport.use(new GoogleStrategy({
 //         clientID: process.env.GOOGLE_CLIENT_ID,
