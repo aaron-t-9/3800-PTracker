@@ -32,6 +32,17 @@ const cors = require('cors');
 
 const app = express();
 
+// const {PrismaClient} = require('@prisma/client');
+// const prisma = new PrismaClient();
+// const User = require('../models/user');
+
+// const initializePassport = require('./auth/passport')
+// initializePassport(
+//     passport,
+//     email => prisma.user.find(user => user.email === email),
+//     id => prisma.user.findUnique(user => user.id)
+// )
+
 require('./auth/passport');
 app.use(methodOverride('_method'))
 app.use(express.static(path.join(__dirname, 'public')));
@@ -67,15 +78,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(passUser);
 
-// app.post('/auth/login', 
-//   passport.authenticate('local', { failureRedirect: '/login' }),
-//   function(req, res) {
-//     res.redirect('/dashboard');
-//   });
+app.post('/auth/login', 
+  passport.authenticate('local', { failureRedirect: '/login', failureMessage:'auth failed' }),
+  function(req, res) {
+    res.redirect('/dashboard');
+  });
 
 app.use(flashMessages);
-app.use(sectionChecker);
-app.use(ndaChecker);
+// app.use(sectionChecker);
+// app.use(ndaChecker);
 
 app.use('/', indexRouter);
 app.use('/shifts', shiftRouter);

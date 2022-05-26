@@ -115,7 +115,7 @@ router.post('/nda', ensureAuthenticated, async (req, res) => {
     return res.redirect('/dashboard');
 });
 
-router.get('/dashboard', ensureAuthenticated, async (req, res) => {
+router.get('/dashboard', async (req, res) => {
     res.render('dashboard/dashboard', {
         page: 'dashboard',
     });
