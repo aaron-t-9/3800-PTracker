@@ -1495,6 +1495,7 @@ input:checked ~ .dot {
 }
 
 @media print {
+  @page { size: landscape; }
   .noprint {
     visibility: hidden;
     display: none !important;
